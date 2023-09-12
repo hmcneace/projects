@@ -1,1 +1,53 @@
+# Get the customer's order and quantity
+order = input("What would you like to order (Puto, Suman, Bibingka): ").strip().lower()
+how_many = int(input("How many would you like to order: "))
+
+# Define the menu prices
+menu_prices = {
+    "puto": 1.30,
+    "suman": 1.50,
+    "bibingka": 1.20,
+}
+
+# Calculate the subtotal based on the selected item and quantity
+if order in menu_prices:
+    item_price = menu_prices[order]
+    subtotal = how_many * item_price
+else:
+    print(f"Sorry, {order.capitalize()} is not on our menu.")
+    subtotal = 0.00
+
+# Ask if the customer wants delivery
+delivery_choice = input("Do you want delivery? (yes/no): ").strip().lower()
+
+# Initialize delivery fee
+delivery_fee = 0.00
+
+# Calculate the delivery fee based on distance if requested
+if delivery_choice == "yes":
+    distance_miles = int(input("Enter the delivery distance in miles (up to 20 miles): "))
+    if distance_miles <= 5:
+        delivery_fee = 5.00
+    elif distance_miles <= 10:
+        delivery_fee = 10.00
+    elif distance_miles <= 15:
+        delivery_fee = 15.00
+    elif distance_miles <= 20:
+        delivery_fee = 20.00
+    else:
+        print("Sorry, we do not deliver beyond 20 miles.")
+else:
+    delivery_fee = 0.00
+
+# Calculate the tax amount (6%)
+tax_rate = 0.06
+tax_amount = subtotal * tax_rate
+
+# Calculate the total cost including the delivery fee and tax
+total_cost = subtotal + delivery_fee + tax_amount
+
+print(f"Subtotal: ${subtotal:.2f}")
+print(f"Delivery Fee: ${delivery_fee:.2f}")
+print(f"Tax (6%): ${tax_amount:.2f}")
+print(f"Total: ${total_cost:.2f}")
 
